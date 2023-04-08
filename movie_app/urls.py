@@ -2,5 +2,5 @@ from . import views
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', ),
+    path('', views.show_all_movie),
 ]

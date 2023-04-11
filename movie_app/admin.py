@@ -11,6 +11,7 @@ class MovieAdmin(admin.ModelAdmin):
     ordering = ['rating']
     list_per_page = 2
 
+    @admin.display(ordering='rating', description='Статус')
     def rating_status(self, mov):
         if mov.rating < 60:
             return 'Зачем это смотреть?'

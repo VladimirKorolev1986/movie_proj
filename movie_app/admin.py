@@ -5,13 +5,39 @@ from django.db.models import QuerySet
 
 # Register your models here.
 
+class RatingFilter(admin.SimpleListFilter):
+    title = 'Фильтр по рейтингу'
+    parameter_name = 'rating'
+
+    def lookups(self, request, model_admin):
+        return [
+            ('<40', 'Низкий'),
+            ('от 40 до 59', 'Средний'),
+            ('от 60 до 79', 'Высокий'),
+            ('>=80', 'Высочайший'),
+        ]
+
+    def queryset(self, request, queryset: QuerySet):
+        if self.value() == '<40':
+            return queryset.filter(rating__lt=40)
+        if self.value() == 'от 40 до 59':
+            return queryset.filter(rating__gte=40).filter(rating__lt=59)
+        if self.value() == 'от 60 до 79':
+            return queryset.filter(rating__gte=60).filter(rating__lt=99)
+        if self.value() == 'от 60 до 79':
+            return queryset.filter(rating__gte=80)
+        return queryset
+
+
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
     list_display = ['name', 'rating', 'currency', 'budget', 'rating_status']
     list_editable = ['rating', 'currency', 'budget']
     ordering = ['rating']
-    list_per_page = 2
+    list_per_page = 5
     actions = ['set_dollars', 'set_euro']
+    search_fields = ['name']
+    list_filter = ['name', 'currency', RatingFilter]
 
     @admin.display(ordering='rating', description='Статус')
     def rating_status(self, mov):

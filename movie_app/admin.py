@@ -23,14 +23,18 @@ class RatingFilter(admin.SimpleListFilter):
         if self.value() == 'от 40 до 59':
             return queryset.filter(rating__gte=40).filter(rating__lt=59)
         if self.value() == 'от 60 до 79':
-            return queryset.filter(rating__gte=60).filter(rating__lt=99)
-        if self.value() == 'от 60 до 79':
+            return queryset.filter(rating__gte=60).filter(rating__lt=79)
+        if self.value() == '>=80':
             return queryset.filter(rating__gte=80)
         return queryset
 
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
+    # fields = ['name', 'rating']
+    # exclude = ['slug']
+    # readonly_fields = ['year']
+    prepopulated_fields = {'slug': ('name',)}
     list_display = ['name', 'rating', 'currency', 'budget', 'rating_status']
     list_editable = ['rating', 'currency', 'budget']
     ordering = ['rating']

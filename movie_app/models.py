@@ -6,6 +6,12 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
+class Director(models.Model):
+    first_name = models.CharField(max_length=100, default='Квентин Тарантино')
+    last_name = models.CharField(max_length=100, default='Квентин Тарантино')
+    director_email = models.EmailField(default='sugar_daddy@gmail.com')
+
+
 class Movie(models.Model):
     EUR = 'EUR'
     USD = 'USD'
@@ -13,7 +19,7 @@ class Movie(models.Model):
     CURRENCY_CHOICES = [
         (EUR, 'Euro'),
         (USD, 'Dollar'),
-        (RUB , 'Rubles'),
+        (RUB, 'Rubles'),
     ]
 
     name = models.CharField(max_length=40)
@@ -22,7 +28,6 @@ class Movie(models.Model):
     budget = models.IntegerField(default=1000000, blank=True, validators=[MinValueValidator(1)])
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='R')
     slug = models.SlugField(default='', null=False, db_index=True)
-    director = models.CharField(max_length=100, default='Квентин Тарантино')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)

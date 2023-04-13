@@ -11,6 +11,9 @@ class Director(models.Model):
     last_name = models.CharField(max_length=100, default='Квентин Тарантино')
     director_email = models.EmailField(default='sugar_daddy@gmail.com')
 
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
+
 
 class Movie(models.Model):
     EUR = 'EUR'

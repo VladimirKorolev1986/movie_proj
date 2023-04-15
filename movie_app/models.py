@@ -14,6 +14,9 @@ class Director(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
+    def get_url(self):
+        return reverse('movie-director', args=[self.id])
+
 
 class Movie(models.Model):
     EUR = 'EUR'

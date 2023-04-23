@@ -8,5 +8,12 @@
     <h3>Имя {{directors.first_name}}</h3>
     <h3>Фамилия {{directors.last_name}}</h3>
     <h3>Почта {{directors.director_email}}</h3>
+    <hr>
+    <h3>Список фильмов</h3>
+    <ul>
+        {% for movie in directors.movie_set.all %}
+            <li>{{movie}}</li>
+        {% endfor %}
+    </ul>
 
 {% endblock %}

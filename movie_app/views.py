@@ -40,12 +40,20 @@ def all_directors(request):
 def one_director(request, id_director: int):
     directors = get_object_or_404(Director, id=id_director)
     return render(request, 'movie_app/one_director.html', {
-        'directors': directors
+        'directors': directors,
     })
 
 
 def all_actors(request):
     actors = Actor.objects.all()
     return render(request, 'movie_app/all_actors.html', {
-        'actors': actors
+        'actors': actors,
     })
+
+
+def one_actor(request, id_actor: int):
+    actor = get_object_or_404(Actor, id=id_actor)
+    return render(request, 'movie_app/one_actor.html', {
+        'actor': actor,
+    })
+

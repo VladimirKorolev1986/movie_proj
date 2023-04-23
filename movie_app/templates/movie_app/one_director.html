@@ -11,7 +11,7 @@
     <hr>
     <h3>Список фильмов</h3>
     <ul>
-        {% for movie in directors.movie_set.all %}
+        {% for movie in directors.movies.all %}
             <li>{{movie}}</li>
         {% endfor %}
     </ul>

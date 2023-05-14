@@ -1,0 +1,17 @@
+
+{% extends 'movie_app/base.html'%}
+
+{% block title %} Информация о фильме - {{ movie.name }} {% endblock %}
+
+{% block content %}
+    <ol>
+        {% for actor in object_list %}
+
+        <li> <a href="{{ actor.get_url }}">{{ actor.first_name }} -  {{ actor.last_name }}</a>  </li>
+
+        {% endfor %}
+    </ol>
+
+
+
+{% endblock %}
